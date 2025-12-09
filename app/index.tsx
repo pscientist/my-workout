@@ -1,7 +1,8 @@
-import { Text, View, ScrollView, StyleSheet, Dimensions } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
+import { router } from "expo-router";
+import { Dimensions, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { width } = Dimensions.get("window");
 
@@ -47,6 +48,10 @@ const nextWorkout = {
 export default function Index() {
   const progressPercentage = (weeklyTraining.current / weeklyTraining.goal) * 100;
 
+  const handleWorkoutPress = () => {
+    router.push("./workout-detail" as any);
+  };
+
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
       <ScrollView
@@ -83,7 +88,11 @@ export default function Index() {
             contentContainerStyle={styles.horizontalScroll}
           >
             {lastWorkouts.map((workout) => (
-              <View key={workout.id} style={styles.workoutCard}>
+              <Pressable
+                key={workout.id}
+                onPress={handleWorkoutPress}
+                style={styles.workoutCard}
+              >
                 <Image
                   source={{ uri: workout.image }}
                   style={styles.workoutImage}
@@ -96,7 +105,7 @@ export default function Index() {
                 <Text style={styles.workoutMeta}>
                   {workout.completed || workout.difficulty}
                 </Text>
-              </View>
+              </Pressable>
             ))}
           </ScrollView>
         </View>
@@ -104,18 +113,20 @@ export default function Index() {
         {/* Next Up Section */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Next up for you</Text>
-          <View style={styles.nextWorkoutCard}>
-            <Image
-              source={{ uri: nextWorkout.image }}
-              style={styles.nextWorkoutImage}
-              contentFit="cover"
-            />
-            <Text style={styles.workoutTitle}>{nextWorkout.title}</Text>
-            <Text style={styles.workoutDetails}>
-              {nextWorkout.duration} · {nextWorkout.type}
-            </Text>
-            <Text style={styles.workoutMeta}>{nextWorkout.difficulty}</Text>
-          </View>
+          <Pressable onPress={handleWorkoutPress}>
+            <View style={styles.nextWorkoutCard}>
+              <Image
+                source={{ uri: nextWorkout.image }}
+                style={styles.nextWorkoutImage}
+                contentFit="cover"
+              />
+              <Text style={styles.workoutTitle}>{nextWorkout.title}</Text>
+              <Text style={styles.workoutDetails}>
+                {nextWorkout.duration} · {nextWorkout.type}
+              </Text>
+              <Text style={styles.workoutMeta}>{nextWorkout.difficulty}</Text>
+            </View>
+          </Pressable>
         </View>
       </ScrollView>
     </SafeAreaView>
