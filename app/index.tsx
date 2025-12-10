@@ -1,7 +1,14 @@
+import { Workout, getWorkouts } from "@/src/api/workouts";
 import { Ionicons } from "@expo/vector-icons";
+import { useQuery } from "@tanstack/react-query";
 import { Image } from "expo-image";
 import { router } from "expo-router";
-import { Dimensions, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Button,
+  Dimensions, Pressable,
+  ScrollView, StyleSheet, Text, View
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const { width } = Dimensions.get("window");
@@ -18,24 +25,24 @@ const weeklyTraining = {
   unit: "mins",
 };
 
-const lastWorkouts = [
-  {
-    id: 1,
-    title: "HIIT 30",
-    duration: "30 mins",
-    type: "High",
-    completed: "Yesterday",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=600&fit=crop",
-  },
-  {
-    id: 2,
-    title: "Strength 45",
-    duration: "45 mins",
-    type: "Strength",
-    difficulty: "Intermediate",
-    image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=600&fit=crop",
-  },
-];
+// const lastWorkouts = [
+//   {
+//     id: 1,
+//     title: "HIIT 30",
+//     duration: "30 mins",
+//     type: "High",
+//     completed: "Yesterday",
+//     image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=600&fit=crop",
+//   },
+//   {
+//     id: 2,
+//     title: "Strength 45",
+//     duration: "45 mins",
+//     type: "Strength",
+//     difficulty: "Intermediate",
+//     image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=600&fit=crop",
+//   },
+// ];
 
 const nextWorkout = {
   title: "Strength 45",
@@ -46,10 +53,48 @@ const nextWorkout = {
 };
 
 export default function Index() {
+  const {
+    data,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useQuery<Workout[]>({
+    queryKey: ["workouts"],
+    queryFn: getWorkouts,
+    staleTime: 5 * 60 * 1000, // 5 mins
+    retry: 2, // retry 2 times if the request fails
+  });
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator />
+        <Text style={{ marginTop: 8 }}>Loading workouts…</Text>
+      </View>
+    );
+  }
+
+  if (isError) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", padding: 16 }}>
+        <Text style={{ marginBottom: 8 }}>
+          Something went wrong loading workouts.
+        </Text>
+        <Text style={{ marginBottom: 16, opacity: 0.7 }}>
+          {(error as Error).message}
+        </Text>
+        <Button title="Try again" onPress={() => refetch()} />
+      </View>
+    );
+  }
+
+  const lastWorkouts = data ?? [];
+
   const progressPercentage = (weeklyTraining.current / weeklyTraining.goal) * 100;
 
   const handleWorkoutPress = () => {
-    router.push("./workout-detail" as any);
+    router.push("./workout-detail");
   };
 
   return (
@@ -79,36 +124,37 @@ export default function Index() {
           </Text>
         </View>
 
-        {/* Last Workout Section */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Last workout</Text>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.horizontalScroll}
-          >
-            {lastWorkouts.map((workout) => (
-              <Pressable
-                key={workout.id}
-                onPress={handleWorkoutPress}
-                style={styles.workoutCard}
-              >
-                <Image
-                  source={{ uri: workout.image }}
-                  style={styles.workoutImage}
-                  contentFit="cover"
-                />
-                <Text style={styles.workoutTitle}>{workout.title}</Text>
-                <Text style={styles.workoutDetails}>
-                  {workout.duration} · {workout.type}
-                </Text>
-                <Text style={styles.workoutMeta}>
-                  {workout.completed || workout.difficulty}
-                </Text>
-              </Pressable>
-            ))}
-          </ScrollView>
-        </View>
+        {lastWorkouts.length === 0 ? (<Text>No workouts found</Text>) : (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Last workout</Text>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.horizontalScroll}
+            >
+              {lastWorkouts.map((workout) => (
+                <Pressable
+                  key={workout.id}
+                  onPress={handleWorkoutPress}
+                  style={styles.workoutCard}
+                >
+                  <Image
+                    source={{ uri: workout.image }}
+                    style={styles.workoutImage}
+                    contentFit="cover"
+                  />
+                  <Text style={styles.workoutTitle}>{workout.title}</Text>
+                  <Text style={styles.workoutDetails}>
+                    {workout.duration} · {workout.type}
+                  </Text>
+                  <Text style={styles.workoutMeta}>
+                    {workout.completed || workout.difficulty}
+                  </Text>
+                </Pressable>
+              ))}
+            </ScrollView>
+          </View>
+        )}
 
         {/* Next Up Section */}
         <View style={styles.section}>
