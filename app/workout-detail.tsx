@@ -1,8 +1,8 @@
-import { Text, View, ScrollView, StyleSheet, Dimensions, Pressable } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { router } from "expo-router";
+import { Dimensions, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { width } = Dimensions.get("window");
 
@@ -56,24 +56,24 @@ export default function WorkoutDetail() {
         {/* Workout Info Card */}
         <View style={styles.infoCard}>
           <Text style={styles.workoutTitle}>{workoutDetail.title}</Text>
-          
+
           <View style={styles.metaRow}>
             <View style={styles.metaItem}>
-              <Ionicons name="time-outline" size={20} color="#00D9D9" />
+              <Ionicons name="time-outline" size={20} color="#14B8A6" />
               <Text style={styles.metaText}>{workoutDetail.duration}</Text>
             </View>
             <View style={styles.metaItem}>
-              <Ionicons name="flame-outline" size={20} color="#FF6B35" />
+              <Ionicons name="flame-outline" size={20} color="#14B8A6" />
               <Text style={styles.metaText}>{workoutDetail.calories} cal</Text>
             </View>
             <View style={styles.metaItem}>
-              <Ionicons name="barbell-outline" size={20} color="#00D9D9" />
+              <Ionicons name="barbell-outline" size={20} color="#14B8A6" />
               <Text style={styles.metaText}>{workoutDetail.difficulty}</Text>
             </View>
           </View>
 
           <View style={styles.ratingRow}>
-            <Ionicons name="star" size={16} color="#FFD700" />
+            <Ionicons name="star" size={16} color="#F59E0B" />
             <Text style={styles.ratingText}>{workoutDetail.rating}</Text>
             <Text style={styles.completedText}>({workoutDetail.completed} completed)</Text>
           </View>
@@ -107,7 +107,7 @@ export default function WorkoutDetail() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Equipment</Text>
           <View style={styles.equipmentCard}>
-            <Ionicons name="checkmark-circle" size={20} color="#00D9D9" />
+            <Ionicons name="checkmark-circle" size={20} color="#14B8A6" />
             <Text style={styles.equipmentText}>No equipment needed</Text>
           </View>
         </View>
@@ -126,7 +126,7 @@ export default function WorkoutDetail() {
         {/* Start Workout Button */}
         <View style={styles.buttonContainer}>
           <Pressable style={styles.startButton}>
-            <Ionicons name="play" size={24} color="#0A0E27" />
+            <Ionicons name="play" size={24} color="#FFFFFF" />
             <Text style={styles.startButtonText}>Start Workout</Text>
           </Pressable>
         </View>
@@ -138,7 +138,7 @@ export default function WorkoutDetail() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0A0E27",
+    backgroundColor: "#FFFFFF",
   },
   scrollView: {
     flex: 1,
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     padding: 4,
   },
   headerTitle: {
-    color: "#FFFFFF",
+    color: "#0F172A",
     fontSize: 20,
     fontWeight: "700",
   },
@@ -167,17 +167,20 @@ const styles = StyleSheet.create({
   workoutImage: {
     width: "100%",
     height: 300,
-    backgroundColor: "#2A2F4A",
+    backgroundColor: "#F1F5F9",
   },
   infoCard: {
-    backgroundColor: "#1A1F3A",
+    backgroundColor: "#FFFFFF",
     padding: 20,
     marginTop: -20,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+    borderBottomWidth: 0,
   },
   workoutTitle: {
-    color: "#FFFFFF",
+    color: "#0F172A",
     fontSize: 28,
     fontWeight: "700",
     marginBottom: 16,
@@ -193,7 +196,7 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   metaText: {
-    color: "#9CA3AF",
+    color: "#64748B",
     fontSize: 14,
   },
   ratingRow: {
@@ -202,13 +205,13 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   ratingText: {
-    color: "#FFFFFF",
+    color: "#0F172A",
     fontSize: 16,
     fontWeight: "600",
     marginRight: 8,
   },
   completedText: {
-    color: "#9CA3AF",
+    color: "#64748B",
     fontSize: 14,
   },
   section: {
@@ -216,35 +219,37 @@ const styles = StyleSheet.create({
     paddingTop: 0,
   },
   sectionTitle: {
-    color: "#FFFFFF",
+    color: "#0F172A",
     fontSize: 22,
     fontWeight: "700",
     marginBottom: 16,
   },
   description: {
-    color: "#9CA3AF",
+    color: "#64748B",
     fontSize: 16,
     lineHeight: 24,
   },
   exerciseCard: {
     flexDirection: "row",
-    backgroundColor: "#1A1F3A",
+    backgroundColor: "#F8FAFC",
     borderRadius: 12,
     padding: 16,
     marginBottom: 12,
     alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
   },
   exerciseNumber: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "#00D9D9",
+    backgroundColor: "#14B8A6",
     justifyContent: "center",
     alignItems: "center",
     marginRight: 16,
   },
   exerciseNumberText: {
-    color: "#0A0E27",
+    color: "#FFFFFF",
     fontSize: 16,
     fontWeight: "700",
   },
@@ -252,45 +257,49 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   exerciseName: {
-    color: "#FFFFFF",
+    color: "#0F172A",
     fontSize: 16,
     fontWeight: "600",
     marginBottom: 4,
   },
   exerciseDetails: {
-    color: "#9CA3AF",
+    color: "#64748B",
     fontSize: 14,
   },
   equipmentCard: {
     flexDirection: "row",
-    backgroundColor: "#1A1F3A",
+    backgroundColor: "#F8FAFC",
     borderRadius: 12,
     padding: 16,
     alignItems: "center",
     gap: 12,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
   },
   equipmentText: {
-    color: "#FFFFFF",
+    color: "#0F172A",
     fontSize: 16,
   },
   instructorCard: {
     flexDirection: "row",
-    backgroundColor: "#1A1F3A",
+    backgroundColor: "#F8FAFC",
     borderRadius: 12,
     padding: 16,
     alignItems: "center",
     gap: 12,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
   },
   instructorAvatar: {
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: "#2A2F4A",
+    backgroundColor: "#E0F2FE",
     justifyContent: "center",
     alignItems: "center",
   },
   instructorName: {
-    color: "#FFFFFF",
+    color: "#0F172A",
     fontSize: 16,
     fontWeight: "600",
   },
@@ -300,7 +309,7 @@ const styles = StyleSheet.create({
   },
   startButton: {
     flexDirection: "row",
-    backgroundColor: "#00D9D9",
+    backgroundColor: "#14B8A6",
     borderRadius: 16,
     padding: 18,
     justifyContent: "center",
@@ -308,9 +317,10 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   startButtonText: {
-    color: "#0A0E27",
+    color: "#FFFFFF",
     fontSize: 18,
     fontWeight: "700",
   },
 });
+
 

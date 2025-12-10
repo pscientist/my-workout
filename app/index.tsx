@@ -61,7 +61,7 @@ export default function Index() {
       >
         {/* Streak Section */}
         <View style={styles.streakCard}>
-          <Ionicons name="flame" size={24} color="#FF6B35" />
+          <Ionicons name="flame" size={24} color="#14B8A6" />
           <View style={styles.streakTextContainer}>
             <Text style={styles.streakNumber}>{streakData.days}-day streak</Text>
             <Text style={styles.streakMessage}>{streakData.message}</Text>
@@ -136,7 +136,7 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0A0E27",
+    backgroundColor: "#FFFFFF",
   },
   scrollView: {
     flex: 1,
@@ -147,24 +147,26 @@ const styles = StyleSheet.create({
   },
   streakCard: {
     flexDirection: "row",
-    backgroundColor: "#1A1F3A",
+    backgroundColor: "#F0F9FF",
     borderRadius: 16,
     padding: 16,
     marginBottom: 32,
     alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#E0F2FE",
   },
   streakTextContainer: {
     marginLeft: 12,
     flex: 1,
   },
   streakNumber: {
-    color: "#00D9D9",
+    color: "#14B8A6",
     fontSize: 18,
     fontWeight: "600",
     marginBottom: 4,
   },
   streakMessage: {
-    color: "#9CA3AF",
+    color: "#64748B",
     fontSize: 14,
     lineHeight: 20,
   },
@@ -172,25 +174,25 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   sectionTitle: {
-    color: "#FFFFFF",
+    color: "#0F172A",
     fontSize: 24,
     fontWeight: "700",
     marginBottom: 16,
   },
   progressBarContainer: {
     height: 12,
-    backgroundColor: "#1A1F3A",
+    backgroundColor: "#E0F2FE",
     borderRadius: 6,
     overflow: "hidden",
     marginBottom: 8,
   },
   progressBar: {
     height: "100%",
-    backgroundColor: "#00D9D9",
+    backgroundColor: "#14B8A6",
     borderRadius: 6,
   },
   progressText: {
-    color: "#9CA3AF",
+    color: "#64748B",
     fontSize: 14,
   },
   horizontalScroll: {
@@ -199,45 +201,57 @@ const styles = StyleSheet.create({
   workoutCard: {
     width: width * 0.6,
     marginRight: 16,
-    backgroundColor: "#1A1F3A",
+    backgroundColor: "#FFFFFF",
     borderRadius: 16,
     overflow: "hidden",
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   workoutImage: {
     width: "100%",
     height: 200,
-    backgroundColor: "#2A2F4A",
+    backgroundColor: "#F1F5F9",
   },
   workoutTitle: {
-    color: "#FFFFFF",
+    color: "#0F172A",
     fontSize: 18,
     fontWeight: "600",
     marginTop: 12,
     marginHorizontal: 12,
   },
   workoutDetails: {
-    color: "#9CA3AF",
+    color: "#64748B",
     fontSize: 14,
     marginTop: 4,
     marginHorizontal: 12,
   },
   workoutMeta: {
-    color: "#9CA3AF",
+    color: "#64748B",
     fontSize: 12,
     marginTop: 4,
     marginBottom: 12,
     marginHorizontal: 12,
   },
   nextWorkoutCard: {
-    backgroundColor: "#1A1F3A",
+    backgroundColor: "#FFFFFF",
     borderRadius: 16,
     overflow: "hidden",
     borderWidth: 2,
-    borderColor: "#00D9D9",
+    borderColor: "#14B8A6",
+    shadowColor: "#14B8A6",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   nextWorkoutImage: {
     width: "100%",
     height: 250,
-    backgroundColor: "#2A2F4A",
+    backgroundColor: "#F1F5F9",
   },
 });
