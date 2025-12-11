@@ -25,25 +25,6 @@ const weeklyTraining = {
   unit: "mins",
 };
 
-// const lastWorkouts = [
-//   {
-//     id: 1,
-//     title: "HIIT 30",
-//     duration: "30 mins",
-//     type: "High",
-//     completed: "Yesterday",
-//     image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=600&fit=crop",
-//   },
-//   {
-//     id: 2,
-//     title: "Strength 45",
-//     duration: "45 mins",
-//     type: "Strength",
-//     difficulty: "Intermediate",
-//     image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=600&fit=crop",
-//   },
-// ];
-
 const nextWorkout = {
   title: "Strength 45",
   duration: "45 mins",

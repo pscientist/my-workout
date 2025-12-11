@@ -19,7 +19,7 @@ const USE_REMOTE_API = false;
 export async function getWorkouts(): Promise<Workout[]> {
     if (!USE_REMOTE_API) {
         // Simulate network delay so loading state is visible
-        await new Promise((resolve) => setTimeout(resolve, 600));
+        await new Promise((resolve) => setTimeout(resolve, 400));
         return workouts as Workout[];
     }
 
